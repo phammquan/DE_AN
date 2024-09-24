@@ -9,6 +9,7 @@ public class PlayerController : Singleton<PlayerController>
     Rigidbody2D _rigi;
     [SerializeField] private bool isGrounded;
     [SerializeField] PlayerState _playerState = PlayerState.IDEL;
+    public PlayerState playerState => _playerState;
     Anim _anim;
     void Start()
     {
@@ -28,7 +29,7 @@ public class PlayerController : Singleton<PlayerController>
         _rigi.velocity = new Vector2(_speed * Input.GetAxisRaw("Horizontal") * Time.deltaTime, _rigi.velocity.y);
         if (isGrounded)
         {
-            if (Input.GetKeyUp(KeyCode.Space) || Input.GetAxisRaw("Vertical") != 0)
+            if (Input.GetKeyUp(KeyCode.Space) || Input.GetAxisRaw("Vertical") == 1)
             {
                 _rigi.velocity = new Vector2(_rigi.velocity.x, jumpForce);
                 isGrounded = false;
